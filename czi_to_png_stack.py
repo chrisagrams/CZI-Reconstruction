@@ -9,9 +9,9 @@ import numpy as np
 parser = ArgumentParser(description="Convert .czi file to PNG image stack.")
 parser.add_argument("czi_file", help="Input .czi file.")
 parser.add_argument("--output_directory", help="Directory to output to.", default="out/")
-parser.add_argument("--channel", help="Channel to extract.", default=2)
-parser.add_argument("--dpi", help="DPI for output image.", default=100)
-parser.add_argument("--threshold", help="Theshold value to cut off noise.", default=20)
+parser.add_argument("--channel", help="Channel to extract.", type=int, default=2)
+parser.add_argument("--dpi", help="DPI for output image.", type=int, default=100)
+parser.add_argument("--threshold", help="Threshold value to cut off noise.", type=float, default=20)
 args = parser.parse_args()
 
 # Disable interactive mode
@@ -25,7 +25,7 @@ if __name__ == __name__:
     print(f"Number of slices: {num_slices}")
 
     img_height, img_width = image.shape[4], image.shape[5]
-    print(f"Dimmensions: {img_height}x{img_width}")
+    print(f"Dimensions: {img_height}x{img_width}")
 
     h_inches_size = img_height / args.dpi
     w_inches_size = img_width / args.dpi
@@ -50,5 +50,4 @@ if __name__ == __name__:
         plt.imshow(rgba_image)
         plt.axis("off")
         plt.imsave(f"{args.output_directory}/{z_slice_index}.png", rgba_image)
-        # plt.savefig(f"{args.output_directory}/{z_slice_index}.png", dpi=args.dpi, bbox_inches="tight", pad_inches=0)
         plt.close()

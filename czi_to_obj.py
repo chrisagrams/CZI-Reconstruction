@@ -7,9 +7,9 @@ import numpy as np
 parser = ArgumentParser(description="Convert .czi stack to OBJ.")
 parser.add_argument("czi_file", help="Input .czi file.")
 parser.add_argument("--output_file", help="Output filename.", default="output.obj")
-parser.add_argument("--channel", help="Channel to extract.", default=2)
-parser.add_argument("--threshold", help="Theshold value to cut off noise.", default=20)
-parser.add_argument("--voxel_size", help="Size of individual voxels.", default=0.1)
+parser.add_argument("--channel", help="Channel to extract.", type=int, default=2)
+parser.add_argument("--threshold", help="Threshold value to cut off noise.", type=float, default=20)
+parser.add_argument("--voxel_size", help="Size of individual voxels.", type=float, default=0.1)
 args = parser.parse_args()
 
 
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     print(f"Number of slices: {num_slices}")
 
     img_height, img_width = image.shape[4], image.shape[5]
-    print(f"Dimmensions: {img_height}x{img_width}")
+    print(f"Dimensions: {img_height}x{img_width}")
 
     points = []
 
